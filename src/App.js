@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import {OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber'
+import Grass from './components/Grass';
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Suspense fallback={<span>loading...</span>}>
+        <Canvas linear dpr={[1, 2]} gl={{ preserveDrawingBuffer: true, antialias: true }} camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 5, 10] }}>
+          <color attach="background" args={['#1e2243']} />
+          <OrbitControls />
+          <Grass/>
+        </Canvas>
+      </Suspense>
+  )
 }
+
 
 export default App;
